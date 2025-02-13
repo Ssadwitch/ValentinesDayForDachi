@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day for Dachi</title>
+    <style>
+        body {
+            background-color: #ffb6c1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #e60073;
+        }
+        h1 {
+            font-size: 60px;
+            margin-top: 50px;
+        }
+        .heart {
+            font-size: 100px;
+            margin-top: 30px;
+        }
+        .question {
+            font-size: 30px;
+            margin-top: 40px;
+        }
+        .button {
+            padding: 10px;
+            background-color: #ff69b4;
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #e60073;
+        }
+        .hidden {
+            display: none;
+        }
+        .pink-hearts {
+            font-size: 50px;
+            margin-top: 20px;
+            color: #ff69b4;
+            display: none;
+        }
+        .message {
+            font-size: 25px;
+            margin-top: 40px;
+            color: #e60073;
+        }
+
+        /* Styles for the movable heart */
+        .movable-heart {
+            position: absolute;
+            font-size: 50px;
+            color: #ff69b4;
+            animation: moveHeart 3s linear infinite;
+        }
+
+        /* Animation to move the heart around the screen */
+        @keyframes moveHeart {
+            0% {
+                top: 0%;
+                left: 0%;
+            }
+            25% {
+                top: 30%;
+                left: 50%;
+            }
+            50% {
+                top: 60%;
+                left: 20%;
+            }
+            75% {
+                top: 80%;
+                left: 70%;
+            }
+            100% {
+                top: 100%;
+                left: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dachi Happy Valentine's Day</h1>
+    <div class="heart">❤️</div>
+
+    <!-- Audio -->
+    <audio id="music" autoplay loop>
+        <source src="D:/Milli Vanilli - Girl I'm Gonna Miss You (Lyrics).mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Questions -->
+    <div class="question" id="q1">1. Where did we have our first date?</div>
+    <input type="text" id="answer1" placeholder="Type your answer here">
+    <button class="button" onclick="checkAnswer1()">Submit Answer</button>
+
+    <div class="question hidden" id="q2">2. Where did I first tell you that I loved you?</div>
+    <input type="text" class="hidden" id="answer2" placeholder="Type your answer here">
+    <button class="button hidden" onclick="checkAnswer2()">Submit Answer</button>
+
+    <div class="question hidden" id="q3">3. Where is our secret place?</div>
+    <input type="text" class="hidden" id="answer3" placeholder="Type your answer here">
+    <button class="button hidden" onclick="checkAnswer3()">Submit Answer</button>
+
+    <!-- Hidden hearts and message -->
+    <div class="pink-hearts" id="hearts">❤️❤️❤️❤️❤️❤️</div>
+    <div class="message hidden" id="loveMessage">
+        Dachi I love you very much and I never get tired of saying this, you are the one with whom I am not ashamed to express my emotions and this makes me very happy because I am convinced that I am very comfortable with you. I love you very much and miss you, <br>-Your Cugrumela
+    </div>
+
+    <div class="message hidden" id="tryAgainMessage">Try again, my smartest friend ;) </div>
+
+    <script>
+        let correctAnswers = ['cinema', 'bakuriani', 'parking']; // Updated answers
+        let currentQuestion = 1;
+
+        function checkAnswer1() {
+            let answer1 = document.getElementById("answer1").value.trim().toLowerCase();
+            if (answer1 === correctAnswers[0].toLowerCase()) {
+                proceedToNextQuestion();
+            } else {
+                showTryAgainMessage();
+            }
+        }
+
+        function checkAnswer2() {
+            let answer2 = document.getElementById("answer2").value.trim().toLowerCase();
+            if (answer2 === correctAnswers[1].toLowerCase()) {
+                proceedToNextQuestion();
+            } else {
+                showTryAgainMessage();
+            }
+        }
+
+        function checkAnswer3() {
+            let answer3 = document.getElementById("answer3").value.trim().toLowerCase();
+            if (answer3 === correctAnswers[2].toLowerCase()) {
+                showHeartsAndMessage();
+                showMovableHeart();
+            } else {
+                showTryAgainMessage();
+            }
+        }
+
+        function proceedToNextQuestion() {
+            if (currentQuestion === 1) {
+                document.getElementById("q1").classList.add('hidden');
+                document.getElementById("answer1").classList.add('hidden');
+                document.querySelectorAll('button')[0].classList.add('hidden');
+                document.getElementById("q2").classList.remove('hidden');
+                document.getElementById("answer2").classList.remove('hidden');
+                document.querySelectorAll('button')[1].classList.remove('hidden');
+            } else if (currentQuestion === 2) {
+                document.getElementById("q2").classList.add('hidden');
+                document.getElementById("answer2").classList.add('hidden');
+                document.querySelectorAll('button')[1].classList.add('hidden');
+                document.getElementById("q3").classList.remove('hidden');
+                document.getElementById("answer3").classList.remove('hidden');
+                document.querySelectorAll('button')[2].classList.remove('hidden');
+            }
+            currentQuestion++;
+        }
+
+        function showHeartsAndMessage() {
+            document.getElementById("hearts").style.display = 'block';
+            document.getElementById("loveMessage").classList.remove('hidden');
+        }
+
+        function showMovableHeart() {
+            let heart = document.createElement("div");
+            heart.classList.add("movable-heart");
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+        }
+
+        function showTryAgainMessage() {
+            document.getElementById("tryAgainMessage").classList.remove('hidden');
+            setTimeout(function() {
+                document.getElementById("tryAgainMessage").classList.add('hidden');
+            }, 3000); // Hide the "Try again" message after 3 seconds
+        }
+    </script>
+
+</body>
+</html>
